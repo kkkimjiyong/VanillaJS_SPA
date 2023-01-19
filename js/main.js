@@ -35,6 +35,28 @@ const postData = async (payload) => {
   }
 };
 
+const deletePost = async (id) => {
+  try {
+    const response = await axios.delete(`${baseUrl}/post/${id}`);
+    console.log(response);
+    if (window.confirm("이 게시글을 삭제하시겠습니까?")) {
+      window.location.href = "http://127.0.0.1:5500/index.html";
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const deleteComment = async (id) => {
+  try {
+    const response = await axios.delete(`${baseUrl}/comment/${id}`);
+    console.log(response);
+    alert("댓글 삭제 완료");
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 getData();
 
 let title;
@@ -69,7 +91,13 @@ const renderPage = async () => {
     <div
     class="postContentBox"
     >${postDetail.content}</div>
-    <button>삭제하기</button>
+    <div
+    class="buttonDiv"
+    >    <button
+    id="postDeleteBtn"
+    class ="postDeleteBtn"
+    >삭제</button></div>
+
     </div>
     <div
     class="commentWrap"
@@ -82,40 +110,54 @@ const renderPage = async () => {
     </div>
     `;
 
-    //? ------- 상세페이지에 댓글들 뿌려주는 작업  --------------
-    let commentCtn = document.createElement("div");
-    commentCtn.classList.add("commentCtn");
-    comments.map((comment) => {
-      let commentBox = document.createElement("div");
-      let commentDeleteBtn = document.createElement("button");
-      commentDeleteBtn.classList.add("commentDeleteBtn");
-      commentBox.setAttribute("id", comment.commentId);
-      commentBox.setAttribute("class", "commentBox");
-      commentBox.addEventListener("click", (e) => {
-        console.log("댓글", e.target);
-      });
-      commentBox.innerText = comment.content;
-      commentDeleteBtn.innerText = "삭제하기";
-      commentBox.appendChild(commentDeleteBtn);
-      commentCtn.appendChild(commentBox);
+    const deletBtn = document.getElementById("postDeleteBtn");
+
+    deletBtn.addEventListener("click", () => {
+      deletePost(hash);
     });
 
-    document.getElementById("commentList").appendChild(commentCtn);
+    //? ------- 상세페이지에 댓글들 뿌려주는 작업  --------------
+    if (comments.length === 0) {
+      let commentCtn = document.createElement("div");
+      commentCtn.innerText = "댓글이 없습니다";
+      document.getElementById("commentList").appendChild(commentCtn);
+    } else {
+      let commentCtn = document.createElement("div");
+      commentCtn.classList.add("commentCtn");
+      comments.map((comment) => {
+        let commentBox = document.createElement("div");
+        let commentDeleteBtn = document.createElement("button");
+        commentDeleteBtn.classList.add("commentDeleteBtn");
+        commentDeleteBtn.id = `${comment.commentId}`;
+        commentBox.setAttribute("id", comment.commentId);
+        commentBox.setAttribute("class", "commentBox");
+        commentDeleteBtn.addEventListener("click", (e) => {
+          deleteComment(e.target.id);
+        });
+        commentBox.innerText = comment.content;
+        commentDeleteBtn.innerText = "삭제";
+        commentBox.appendChild(commentDeleteBtn);
+        commentCtn.appendChild(commentBox);
+        document.getElementById("commentList").appendChild(commentCtn);
+      });
+    }
   } else if (hash == "postPage") {
     mainPage.innerHTML = `
-    <h1
+    <div
+    class="postPageCtn"
+    ><h1
     class="postPageTitle"
     >새해 인사 한마디 적고가시지요..</h1>
-    <h1
+    <h2
     class="inputTitle"
     >제목</h1>
     <input
     placeholder="글 제목을 입력해주세요"
     onchange="titleChange(this)"
     />
-    <h1
+    <h2
     class="inputTitle"
-    >내용</h1>
+    >내용</h2>
     <input
     placeholder="글 내용을 입력해주세요"
     class="contentInput"
@@ -123,7 +165,8 @@ const renderPage = async () => {
     />
     <button 
     class="postBtn"
-    onclick='postClickEvent()' >등록하기</button>`;
+    onclick='postClickEvent()' >등록하기</button></div>
+    `;
   } else {
     mainPage.innerHTML = `
     <div id="root">
