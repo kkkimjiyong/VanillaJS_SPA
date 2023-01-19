@@ -1,0 +1,164 @@
+#root {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.header {
+  right: 10px;
+  top: 0;
+  position: absolute;
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.postListBox {
+  margin-right: 25px;
+  width: 700px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.postBox {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: center;
+  width: 60%;
+  height: 100px;
+  padding: 2% 20% 2% 2%;
+  margin-top: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 3px 3px 0px gray;
+}
+.postListImg {
+  height: 100%;
+  width: 30%;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.ImgBox {
+  background-color: rebeccapurple;
+}
+
+.detailCtn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: gainsboro;
+  width: 60%;
+  height: 100vh;
+}
+.detailImg {
+  margin: 2% 0;
+  height: 50%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.contentWrap {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.postTitle {
+  margin: 5% 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.postContentBox {
+  margin: 5% 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.commentWrap {
+  width: 100%;
+  border-top: 3px solid gray;
+}
+
+.commentBox {
+  display: flex;
+  justify-content: space-between;
+  margin: 2px 0px;
+  border: 1px solid black;
+}
+
+.commentDeleteBtn {
+  width: 10%;
+  height: 100%;
+}
+
+.postBtn {
+  /* position: absolute; */
+  background-color: pink;
+  font-weight: 600;
+  font-size: 20px;
+  display: flex;
+  width: 50%;
+  max-width: 600px;
+  justify-content: center;
+  border: none;
+  border-radius: 20px;
+  padding: 20px;
+  margin: 7% 0 0 0;
+}
+.postBtn:hover {
+  background-color: #db4da6;
+  color: white;
+  cursor: pointer;
+}
+
+.postPageTitle {
+  text-shadow: 0 0 7px #d90368, 0 0 10px #d90368, 0 0 21px #fff,
+    0 0 42px #d90368, 0 0 82px #d90368, 0 0 92px #d90368, 0 0 102px #d90368,
+    0 0 151px #d90368;
+}
+
+.postBtn_postPage {
+  background-color: pink;
+  display: flex;
+  width: 50%;
+  justify-content: center;
+  border-radius: 20px;
+  padding: 20px;
+  margin: 5% 0px;
+}
+
+.inputTitle {
+  margin: 2% 0%;
+  width: 50%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+input {
+  border: none;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 18px;
+  box-shadow: 0px 3px 3px 0px gray;
+  padding: 0% 2%;
+  width: 50%;
+  height: 140px;
+}
+
+.contentInput {
+  height: 240px;
+}
+
+Img {
+  width: 100px;
+}
